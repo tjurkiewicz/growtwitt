@@ -3,13 +3,13 @@ VIRTUALENV=virtualenv
 .PHONY: clear test
 
 .env: requirements.txt
-	rm -fr $@ && virtualenv $@ && \
+	rm -fr $@ && $(VIRTUALENV) $@ && \
 	. $@/bin/activate && \
-	pip install -r $^ && 
+	pip install -r $^ && \
 	deactivate
 
 .testenv: requirements.txt requirements_test.txt
-	rm -fr $@ && virtualenv $@ && \
+	rm -fr $@ && $(VIRTUALENV) $@ && \
 	. $@/bin/activate && \
 	pip install -r $(word 1,$^) && pip install -r $(word 2,$^) && \
 	deactivate
