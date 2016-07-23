@@ -1,0 +1,4 @@
+<form method="post" action="{{ url('twitter:request-token') }}">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <button>go!</button>
+</form>
