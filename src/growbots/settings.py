@@ -49,8 +49,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'growbots.twitter.middleware.TwitterMiddleware',
 ]
 
 ROOT_URLCONF = 'growbots.urls'

@@ -12,7 +12,8 @@ class TwitterApplication(growbots.core.application.Application):
 
     views = [
         (growbots.twitter.views.TwitterRequestTokenView, r'^request_token$', 'request-token'),
-        (growbots.twitter.views.TwitterAcceptView, r'^accept_token$', 'accept-token'),
+        (growbots.twitter.views.TwitterAcceptView,       r'^accept_token$', 'accept-token'),
+        (growbots.twitter.views.TwitterLogoutView,       r'^logout', 'logout'),
     ]
 
 
