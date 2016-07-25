@@ -3,7 +3,7 @@ import pytest
 import views
 
 def test_template_name():
-    class SomeView(views.TemplateView):
+    class SomeView(views.TemplateNameMixin):
         pass
 
     view = SomeView()

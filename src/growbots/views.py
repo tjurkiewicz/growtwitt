@@ -8,7 +8,7 @@ filename_re = re.compile(r'(.*)_[^_]+$')
 class TemplateNameMixin(object):
 
     def get_template_names(self):
-        if self.template_name is not None:
+        if hasattr(self, 'template_name'):
             return super(TemplateNameMixin, self).get_template_names()
         else:
             # DRY: package & class already define nice template name.
