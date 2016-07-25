@@ -17,7 +17,7 @@ PEP8=pep8
 
 test: .testenv 
 	. $^/bin/activate && $(PEP8) src --max-line-length=109 && deactivate
-	. $^/bin/activate && py.test -s && deactivate
+	. $^/bin/activate && PYTHONPATH=src py.test --cov=src --ds=growbots.settings -v && deactivate
 
 clear:
 	find . -name "*.pyc" -delete

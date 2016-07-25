@@ -1,4 +1,5 @@
 import django.conf.urls
+import django.core.urlresolvers
 
 
 class Application(object):
@@ -17,3 +18,7 @@ class Application(object):
     @property
     def urls(self):
         return self.get_urls(), self.app_name, self.name
+
+    def reverse(self, view_name, *args, **kwargs):
+        view_name = '{0}:{1}'.format(self.name, view_name)
+        return django.core.urlresolvers.reverse(view_name, *args, **kwargs)
