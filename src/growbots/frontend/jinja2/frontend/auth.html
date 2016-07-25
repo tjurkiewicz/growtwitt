@@ -1,4 +1,16 @@
-<form method="post" action="{{ url('twitter:request-token') }}">
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-    <button>go!</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter followers</title>
+</head>
+<body>
+    <h1>Welcome to twitter app!</h1>
+
+    <form method="post" action="{{ url('twitter:request-token') }}">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <button>Click me to start!</button>
+    </form>
+</body>
+</html>
+
