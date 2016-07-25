@@ -1,13 +1,17 @@
 
 import api
 import json
+import urlparse
 
 
 class MockClient(object):
     responses = {
-        'prince':  ('bob', 'rick'),
-        'bob': ('andrew',),
-        'rick': ('andrew',),
+        ('prince', -1):  (('bob', 'rick'), 1),
+        ('prince', 1):   (('jeff', 'ed'),  0),
+        ('bob', -1):     (('andrew',),     0),
+        ('rick', -1):    (('andrew',),     0),
+        ('jeff', -1):    (('marie',),      0),
+        ('ed',   -1):    (('marie',),      0),
     }
 
     def __init__(self, *args, **kwargs):
@@ -16,18 +20,20 @@ class MockClient(object):
     def request(self, url, method='GET'):
         response = {'status': '200'}
 
-        # Easy on this, don't use a key which accidentaly get matched (eg. `user`)
-        for k in self.responses:
-            if k in url:
-                followers = ({'screen_name': f } for f in self.responses[k])
-                return response, json.dumps({'users': list(followers), 'next_cursor': 0})
+        parsed_url = urlparse.urlparse(url)
+        qsl = dict(urlparse.parse_qsl(parsed_url.query))
+        screen_name, cursor = qsl['screen_name'], int(qsl['cursor'])
 
-        # Test data set is not closed.
-        raise NotImplementedError
+        followers, next_cursor = self.responses[(screen_name, cursor)]
+
+        return response, json.dumps({
+            'next_cursor': next_cursor,
+            'users': [{'screen_name': f} for f in followers],
+        })
 
 
 def test_get_followers(monkeypatch):
     monkeypatch.setattr('oauth2.Client', MockClient)
 
     followers = api.get_followers('oauth_token', 'oauth_token_secret', 'prince')
-    assert followers == {'andrew': 2}
+    assert followers == {'andrew': 2, 'marie': 2, }

@@ -122,8 +122,7 @@ def get_followers(oauth_token, oauth_token_secret, screen_name, max_depth=2):
 
                 parsed_content = json.loads(content)
                 for user in parsed_content.get('users', []):
-                    screen_name = user['screen_name']
-                    queue.appendleft((screen_name, depth+1))
+                    queue.appendleft((user['screen_name'], depth+1))
 
                 cursor = parsed_content.get('next_cursor', 0)
 
