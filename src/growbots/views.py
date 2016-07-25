@@ -21,4 +21,3 @@ class TemplateNameMixin(object):
                 return [os.path.join(directory, '{}.html'.format(filename))]
             except IndexError:
                 return super(TemplateNameMixin, self).get_template_names()
-

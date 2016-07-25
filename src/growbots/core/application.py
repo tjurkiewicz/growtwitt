@@ -2,7 +2,7 @@ import django.conf.urls
 
 
 class Application(object):
-    
+
     name = None
     app_name = None
     views = []

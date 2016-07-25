@@ -129,4 +129,3 @@ def get_followers(oauth_token, oauth_token_secret, screen_name, max_depth=2):
     # result contains duplicates.
     result = sorted(result)
     return {k: len(list(g)) for k, g in itertools.groupby(result)}
-

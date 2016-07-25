@@ -43,7 +43,8 @@ class TwitterAcceptView(django.views.generic.View):
         oauth_verifier = request.GET['oauth_verifier']
         oauth_token = request.GET['oauth_token']
         oauth_token_secret = request.session['twitter_request_token']['oauth_token_secret']
-        twitter_access_token = growbots.twitter.api.get_access_token(oauth_token, oauth_token_secret, oauth_verifier)
+        twitter_access_token = growbots.twitter.api.get_access_token(
+            oauth_token, oauth_token_secret, oauth_verifier)
 
         request.session['twitter_access_token'] = twitter_access_token
         del request.session['twitter_request_token']
@@ -64,4 +65,3 @@ class TwitterOAuthMixin(object):
                 return django.shortcuts.redirect('frontend:auth')
 
         return super(TwitterOAuthMixin, self).dispatch(request, *args, **kwargs)
-

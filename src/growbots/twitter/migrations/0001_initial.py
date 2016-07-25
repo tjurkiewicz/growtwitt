@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FollowersCacheEntry',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),  # noqa
                 ('uuid4', models.CharField(max_length=32)),
                 ('screen_name', models.CharField(max_length=128)),
                 ('following', models.PositiveIntegerField()),

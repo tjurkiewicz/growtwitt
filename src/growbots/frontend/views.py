@@ -4,12 +4,10 @@ import uuid
 import django.http.response
 import django.views.generic
 
-
 import growbots.views
 import growbots.twitter.api
 import growbots.twitter.models
 import growbots.twitter.views
-
 
 
 class AuthView(growbots.views.TemplateNameMixin, django.views.generic.TemplateView):
