@@ -14,7 +14,7 @@ class FrontendApplication(growbots.core.application.Application):
         (growbots.frontend.views.AuthView, r'^$', 'auth',),
         (growbots.frontend.views.FollowersView, r'^followers/followers$', 'followers-of-followers',),
         (growbots.frontend.views.FollowersAPIView,
-            r'^followers/followers.json/(?P<uuid>[a-z0-9\-]+)$',
+            r'^followers/followers.json/(?P<uuid>[a-f0-9]+)$',
             'followers-of-followers-api',),
     ]
 

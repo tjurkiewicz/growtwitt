@@ -111,7 +111,6 @@ def get_followers(oauth_token, oauth_token_secret, screen_name, max_depth=2):
                 })
 
                 url = '{}?{}'.format(followers_url, params)
-                print screen_name, cursor
                 response, content = client.request(url, method='GET')
                 status = response['status']
 

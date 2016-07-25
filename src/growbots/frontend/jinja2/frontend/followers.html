@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Followers</h1>
-    <p>Technical endpoint: <a href="{{ url('followers-of-followers-api', kwargs=dict(uuid=uuid.hex)) }}"></a></p>
+    <p>Technical endpoint: <a href="{{ url('frontend:followers-of-followers-api', kwargs=dict(uuid=uuid)) }}"></a></p>
     <ul>
     {% for follower, order in followers.iteritems() %}
         <li>{{ follower }}: {{order}}</li>

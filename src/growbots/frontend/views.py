@@ -27,7 +27,7 @@ class FollowersView(growbots.views.TemplateNameMixin,
     def get_context_data(self, **kwargs):
         ctx = super(FollowersView, self).get_context_data(**kwargs)
         ctx['followers'] = self.get_followers()
-        ctx['uuid'] = uuid.uuid4()
+        ctx['uuid'] = uuid.uuid4().hex
 
         # Persist data inbetween
         growbots.twitter.models.FollowersCacheEntry.objects.bulk_create(
@@ -63,5 +63,13 @@ class FollowersAPIView(django.views.generic.View):
 
         cached = growbots.twitter.models.FollowersCacheEntry.objects.filter(uuid4=uuid4).\
             values('screen_name', 'following')
-        content = json.dumps(list(map(self.format_follower, cached)))
-        return django.http.response.HttpResponse(content, content_type='application/json')
+
+        if len(cached) > 0:
+            content = json.dumps(list(map(self.format_follower, cached)))
+            return django.http.response.HttpResponse(content, content_type='application/json')
+        else:
+            content = json.dumps({
+                'error': 1,
+                'message': 'No objects found.',
+            })
+            return django.http.response.HttpResponseNotFound(content, content_type='application/json')
