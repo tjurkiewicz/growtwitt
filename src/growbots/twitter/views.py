@@ -23,7 +23,6 @@ class TwitterRequestTokenView(django.views.generic.View):
     def post(self, request, *args, **kwargs):
         twitter_request_token = growbots.twitter.api.get_request_token(request)
         request.session['twitter_request_token'] = twitter_request_token
-        print "Twitter request token", twitter_request_token
 
         redirect_url = growbots.twitter.api.get_user_redirect_url(twitter_request_token['oauth_token'])
         return django.http.HttpResponseRedirect(redirect_url)
@@ -45,7 +44,6 @@ class TwitterAcceptView(django.views.generic.View):
         oauth_token = request.GET['oauth_token']
         oauth_token_secret = request.session['twitter_request_token']['oauth_token_secret']
         twitter_access_token = growbots.twitter.api.get_access_token(oauth_token, oauth_token_secret, oauth_verifier)
-        print "Twitter access token", twitter_access_token
 
         request.session['twitter_access_token'] = twitter_access_token
         del request.session['twitter_request_token']

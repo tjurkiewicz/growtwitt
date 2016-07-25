@@ -15,7 +15,7 @@ VIRTUALENV=virtualenv
 	deactivate
 
 test: .testenv
-	. $^/bin/activate && py.test && deactivate
+	. $^/bin/activate && py.test -s && deactivate
 
 clear:
 	find . -name "*.pyc" -delete

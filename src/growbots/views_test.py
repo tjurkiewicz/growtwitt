@@ -1,6 +1,5 @@
-import pytest
-
 import views
+
 
 def test_template_name():
     class SomeView(views.TemplateNameMixin):
